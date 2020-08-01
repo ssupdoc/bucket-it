@@ -92,14 +92,32 @@ function fetchNearbyPlaces() {
         .then(response => response.json())
         .then(data => {
             if (data && data.length) {
-                placeMaster = data
-                renderNearbyPlaces(data)
+                placeMaster = sanitizeData(data)
+                renderAllPlaces()
             }
         });
 }
 
+function renderAllPlaces() {
+    renderNearbyPlaces(getFromPlaceMaster('nearby'))
+    renderBucketList()
+}
+
+function sanitizeData(data) {
+    let bucketList = getBucketList()
+    data.forEach(place => { 
+        if(!bucketList.find(bucketPlace => bucketPlace.id === place.id )) {
+            place.columnType = "nearby" 
+        } else {
+            place.columnType = "bucket"
+        }
+    })
+    return data
+}
+
 function renderNearbyPlaces(nearbyPlaces) {
-    let $nearbyPlacesDiv = document.getElementById('nearby-places')
+    let $nearbyPlacesDiv = document.getElementById('nearby-dynamic')
+    $nearbyPlacesDiv.innerHTML = ''
     nearbyPlaces.forEach(place => {
         let tileDiv = `
         <div class="tile is-ancestor" id="place-tile-${place.id}">
@@ -117,31 +135,59 @@ function renderNearbyPlaces(nearbyPlaces) {
     })
 }
 
+function renderBucketList() {
+    let bucketList = getBucketList()
+    let $bucketListDiv = document.getElementById('bucket-dynamic')
+    $bucketListDiv.innerHTML = ''
+    bucketList.forEach(place => {
+        let tileDiv = `
+        <div class="tile is-ancestor" id="place-tile-${place.id}">
+            <div class="tile is-vertical">
+                <div class="tile is-parent">
+                    <div class="tile is-child notification tile-color">
+                        <img src="${place.image}">
+                        <p class="subtitle has-text-centered">${place.name}</p>
+                        <label class="checkbox is-pulled-right">
+                            <input type="checkbox">
+                            Done
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>`
+        $bucketListDiv.innerHTML += tileDiv
+    })
+}
+
 function addToBucketList(event) {
     const placeId = event.target.id.split('-')[1]
-    let $bucketList = document.getElementById('bucket-list')
     let place = placeMaster.find(place => place.id == placeId)
-    let tileDiv = `
-    <div class="tile is-ancestor" id="bucket-tile-${place.id}">
-        <div class="tile is-vertical">
-            <div class="tile is-parent">
-            <div class="tile is-child notification tile-color">
-                <img src="${place.image}">
-                <p class="subtitle has-text-centered">${place.name}</p>
-                <label class="checkbox is-pulled-right">
-                        <input type="checkbox">
-                        Done
-                    </label>
-            </div>
-            </div>
-        </div>
-    </div>`
-    $bucketList.innerHTML += tileDiv
+    place.columnType = "bucket"
+    addBucketItemToLocalStorage(place)
+    renderAllPlaces()
+}
 
-    removeFromNearbyPlaces(placeId)
+function addBucketItemToLocalStorage(place) {
+    let currentLocalStorage = getBucketList()
+    currentLocalStorage.unshift(place)
+    localStorage.setItem('bucketList', JSON.stringify(currentLocalStorage))
+}
+
+function getBucketList() {
+    let currentLocalStorage = localStorage.getItem('bucketList')
+    if(currentLocalStorage) {
+        currentLocalStorage = JSON.parse(currentLocalStorage)
+    } else {
+        currentLocalStorage = []
+    }
+    return currentLocalStorage
 }
 
 function removeFromNearbyPlaces(id) {
     let $place = document.getElementById('place-tile-' + id)
     $place.remove()
+}
+
+function getFromPlaceMaster(columnType) {
+    return placeMaster.filter(place => place.columnType === columnType)
 }
