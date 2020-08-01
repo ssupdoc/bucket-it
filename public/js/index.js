@@ -13,7 +13,7 @@ function renderMap() {
         zoom: 6
     });
     infoWindow = new google.maps.InfoWindow();
-
+    debugger
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -88,7 +88,7 @@ function addMarker(map, pos, title) {
  * Fetches nearby places from API
  */
 function fetchNearbyPlaces() {
-    fetch('mock.json')
+    fetch('/js/mock.json')
         .then(response => response.json())
         .then(data => {
             if (data && data.length) {
