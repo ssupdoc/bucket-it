@@ -26,7 +26,7 @@
 
     <div class="columns">
         
-        <div class="column side-panel-left">
+        <div class="column side-panel-left" id="nearby-places">
             <div class="columns">
                 <div class="column is-8 is-offset-one-quarter">
                     <h1 class="title">
@@ -34,32 +34,25 @@
                     </h1>
                 </div>
             </div>
-            <!-- Cards -->
-            <div class="tile is-ancestor">
-                <div class="tile is-vertical">
-                  <div class="tile is-parent">
-                    <div class="tile is-child notification tile-color">
-                        <img src="https://www.newzealand.com/assets/Tourism-NZ/Christchurch-Canterbury/9aa11093e3/img-1536989144-436-6533-p-4AE01862-F0F6-45CC-A4A8B61D309D3D12-2544003__aWxvdmVrZWxseQo_FocalPointCropWzQyNyw2NDAsNTMsNTAsODUsImpwZyIsNjUsMi41XQ.jpg">
-                        <p class="title">Wide tile</p>
-                        <button class="button is-success">Light</button>
-                    </div>
-                  </div>
-                </div>
+            <div id="nearby-dynamic">
+                <!-- Dynamic content -->
             </div>
-            <!-- Cards -->
         </div>
 
         <div class="column map">
             <div id="googleMap" style="width:100%;" class="full-height"></div>
         </div>
 
-        <div class="column side-panel-right">
+        <div class="column side-panel-right" id="bucket-list">
             <div class="columns">
-                <div class="column is-half is-offset-one-quarter">
+                <div class="column is-8 is-offset-one-quarter">
                     <h1 class="title">
                         Bucket list
                     </h1>
                 </div>
+            </div>
+            <div id="bucket-dynamic">
+                <!-- Dynamic content -->
             </div>
         </div>
 
