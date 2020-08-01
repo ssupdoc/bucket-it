@@ -1,2 +1,2 @@
 # bucket-it
-A platform to empower travel enthusiasts
+A platform that empowers travel enthusiasts 
