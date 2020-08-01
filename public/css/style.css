@@ -6,10 +6,9 @@
     height: 100%
 }
 
-.max-90 {
-    height: 90%;
-    overflow-y: auto;
-    overflow-x: hidden;
+.max-80 {
+    height: 80%;
+    overflow: auto;
 }
 
 .simple-padding {
@@ -22,7 +21,13 @@
     height: 10%;
     right: 0%;;
     width: 100%;
-    background-color: #00d1b2;
+    background-image: url('/images/img1.png');
+    background-size: cover;
+    
+}
+
+.side-panel-left::-webkit-scrollbar, .side-panel-right::-webkit-scrollbar {
+    display: none;
 }
 
 .side-panel-left{
@@ -50,5 +55,10 @@
     right: 0%;
     height: 90%;
     width: 30%;
+}
+
+.tile-color{
+    background-color: #FAFAFA;
+    box-shadow: 2px 2px 8px;
 }
 
