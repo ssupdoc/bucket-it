@@ -1,5 +1,5 @@
 .stretch-height {
-    height: calc(95vh)
+    height: calc(87vh)
 }
 
 .full-height {
@@ -9,4 +9,8 @@
 .max-80 {
     height: 80%;
     overflow: auto;
+}
+
+.simple-padding {
+    padding: 1rem
 }
