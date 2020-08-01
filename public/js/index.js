@@ -13,7 +13,6 @@ function renderMap() {
         zoom: 6
     });
     infoWindow = new google.maps.InfoWindow();
-    debugger
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
