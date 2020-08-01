@@ -1,0 +1,22 @@
+{
+  "name": "bucket-it",
+  "version": "1.0.0",
+  "description": "A platform to empower travel enthusiasts",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ssupdoc/bucket-it.git"
+  },
+  "author": "Team Bucket It",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ssupdoc/bucket-it/issues"
+  },
+  "homepage": "https://github.com/ssupdoc/bucket-it#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
