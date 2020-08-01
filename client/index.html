@@ -7,52 +7,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bucket It!</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 
 <body>
     <!-- Header of Web Application -->
-    <section class="hero is-primary">
-        <div class="hero-body simple-padding">
-                <h1 class="title">
-                    Bucket It!
-                </h1>
-        </div>
-    </section>
-
-    <div class="container">
-        <div class="columns is-centered">
-            <div class="column">
-                <div class="tile is-parent stretch-height">
-                    <article class="tile is-child notification full-height">
-                        <div class="content full-height">
-                            <p class="title">Nearby places</p>
-                            <div class="content full-height max-80">
-                                <!-- The tiles go here -->
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-            <div class="column is-two-fifths is-centered">
-                We have used artificial intelligence to find that you are in GridAKL
-            </div>
-            <div class="column">
-                <div class="tile is-parent stretch-height">
-                    <article class="tile is-child notification full-height">
-                        <div class="content full-height">
-                            <p class="title">Bucket list!</p>
-                            <div class="content full-height max-80">
-                                <!-- The tiles go here -->
-                            </div>
-                        </div>
-                    </article>
+    <div class="columns">
+        <div class="column header">
+            <div class="columns">
+                <div class="column is-half is-offset-one-quarter">
+                    <p class="title">
+                        Bucket It!
+                    </p>
                 </div>
             </div>
         </div>
     </div>
-<script src="./index.js"></script>
+
+    <div class="columns">
+        
+        <div class="column side-panel-left">
+            <div class="columns">
+                <div class="column is-half is-offset-one-quarter">
+                    <h1 class="title">
+                        Bucket It!
+                    </h1>
+                </div>
+            </div>
+            <!-- Cards -->
+            <div class="tile is-ancestor">
+                <div class="tile is-vertical">
+                  <div class="tile is-parent">
+                    <div class="tile is-child notification is-danger">
+                        <img src="https://www.newzealand.com/assets/Tourism-NZ/Christchurch-Canterbury/9aa11093e3/img-1536989144-436-6533-p-4AE01862-F0F6-45CC-A4A8B61D309D3D12-2544003__aWxvdmVrZWxseQo_FocalPointCropWzQyNyw2NDAsNTMsNTAsODUsImpwZyIsNjUsMi41XQ.jpg">
+                        <p class="title">Wide tile</p>
+                        <button class="button is-light">Light</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="tile is-ancestor">
+                <div class="tile is-vertical">
+                  <div class="tile is-parent">
+                    <div class="tile is-child notification is-danger">
+                        <img src="https://www.newzealand.com/assets/Tourism-NZ/Christchurch-Canterbury/9aa11093e3/img-1536989144-436-6533-p-4AE01862-F0F6-45CC-A4A8B61D309D3D12-2544003__aWxvdmVrZWxseQo_FocalPointCropWzQyNyw2NDAsNTMsNTAsODUsImpwZyIsNjUsMi41XQ.jpg">
+                        <p class="title">Wide tile</p>
+                        <button class="button is-light">Light</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <!-- Cards -->
+        </div>
+
+        <div class="column map">
+            We have used artificial intelligence to find that you are in GridAKL
+        </div>
+
+        <div class="column side-panel-right">
+            <div class="columns">
+                <div class="column is-half is-offset-one-quarter">
+                    <h1 class="title">
+                        Bucket It!
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 </body>
 
+<script src="./index.js"></script>
+
 </html>
+
