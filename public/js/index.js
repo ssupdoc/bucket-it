@@ -3,6 +3,7 @@ window.onload = () => {
 }
 
 const AUCKLAND_LOCATION = { lat: -36.8483, lng: 174.7625 }
+let placeMaster = []
 
 /**
  * Render map based on current location
@@ -91,11 +92,56 @@ function fetchNearbyPlaces() {
         .then(response => response.json())
         .then(data => {
             if (data && data.length) {
+                placeMaster = data
                 renderNearbyPlaces(data)
             }
         });
 }
 
 function renderNearbyPlaces(nearbyPlaces) {
+    let $nearbyPlacesDiv = document.getElementById('nearby-places')
+    nearbyPlaces.forEach(place => {
+        let tileDiv = `
+        <div class="tile is-ancestor" id="place-tile-${place.id}">
+            <div class="tile is-vertical">
+                <div class="tile is-parent">
+                <div class="tile is-child notification tile-color">
+                    <img src="${place.image}">
+                    <p class="subtitle has-text-centered">${place.name}</p>
+                    <button id="bucket-${place.id}" onclick="addToBucketList(event)" class="button is-success is-small is-pulled-right">Bucket it!</button>
+                </div>
+                </div>
+            </div>
+        </div>`
+        $nearbyPlacesDiv.innerHTML += tileDiv
+    })
+}
 
+function addToBucketList(event) {
+    const placeId = event.target.id.split('-')[1]
+    let $bucketList = document.getElementById('bucket-list')
+    let place = placeMaster.find(place => place.id == placeId)
+    let tileDiv = `
+    <div class="tile is-ancestor" id="bucket-tile-${place.id}">
+        <div class="tile is-vertical">
+            <div class="tile is-parent">
+            <div class="tile is-child notification tile-color">
+                <img src="${place.image}">
+                <p class="subtitle has-text-centered">${place.name}</p>
+                <label class="checkbox is-pulled-right">
+                        <input type="checkbox">
+                        Done
+                    </label>
+            </div>
+            </div>
+        </div>
+    </div>`
+    $bucketList.innerHTML += tileDiv
+
+    removeFromNearbyPlaces(placeId)
+}
+
+function removeFromNearbyPlaces(id) {
+    let $place = document.getElementById('place-tile-' + id)
+    $place.remove()
 }

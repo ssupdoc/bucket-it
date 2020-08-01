@@ -55,6 +55,7 @@
     right: 0%;
     height: 90%;
     width: 30%;
+    overflow-y: scroll;
 }
 
 .tile-color{
