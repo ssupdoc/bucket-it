@@ -1,0 +1,12 @@
+.stretch-height {
+    height: calc(95vh)
+}
+
+.full-height {
+    height: 100%
+}
+
+.max-80 {
+    height: 80%;
+    overflow: auto;
+}
