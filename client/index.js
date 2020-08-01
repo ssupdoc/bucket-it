@@ -27,12 +27,14 @@ function renderMap() {
                 setMapView(map, pos, 10)
             },
             () => {
-                handleLocationError(true, infoWindow, map.getCenter());
+                // handleLocationError(true, infoWindow, map.getCenter());
+                addMarker(map, AUCKLAND_LOCATION, 'You are here')
             }
         );
     } else {
         // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
+        // handleLocationError(false, infoWindow, map.getCenter());
+        addMarker(map, AUCKLAND_LOCATION, 'You are here')
     }
 }
 
