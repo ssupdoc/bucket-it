@@ -12,73 +12,76 @@
 
 <body>
     <!-- Header of Web Application -->
-    <div class="columns">
-        <div class="column header">
-            <div class="columns">
-                <div class="column is-half is-offset-one-quarter">
-                    <p class="title">
-                        Bucket It!
-                    </p>
+    <section class="hero is-primary">
+        <div class="hero-body simple-padding">
+            <h2 class="title is-3">
+                Bucket It!
+            </h2>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="columns is-centered is-gapless">
+            <div class="column">
+                <div class="tile is-parent stretch-height">
+                    <article class="tile is-child notification full-height px-3">
+                        <div class="content full-height">
+                            <p class="title has-text-weight-light is-size-4">Nearby places</p>
+                            <div class="content full-height max-90">
+                                <div class="tile is-ancestor">
+                                    <div class="tile is-vertical">
+                                        <div class="tile is-parent">
+                                            <div class="tile is-child notification is-danger">
+                                                <img
+                                                    src="https://www.newzealand.com/assets/Tourism-NZ/Christchurch-Canterbury/9aa11093e3/img-1536989144-436-6533-p-4AE01862-F0F6-45CC-A4A8B61D309D3D12-2544003__aWxvdmVrZWxseQo_FocalPointCropWzQyNyw2NDAsNTMsNTAsODUsImpwZyIsNjUsMi41XQ.jpg">
+                                                <p class="title">Wide tile</p>
+                                                <button class="button is-light">Light</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tile is-ancestor">
+                                    <div class="tile is-vertical">
+                                        <div class="tile is-parent">
+                                            <div class="tile is-child notification is-danger">
+                                                <img
+                                                    src="https://www.newzealand.com/assets/Tourism-NZ/Christchurch-Canterbury/9aa11093e3/img-1536989144-436-6533-p-4AE01862-F0F6-45CC-A4A8B61D309D3D12-2544003__aWxvdmVrZWxseQo_FocalPointCropWzQyNyw2NDAsNTMsNTAsODUsImpwZyIsNjUsMi41XQ.jpg">
+                                                <p class="title">Wide tile</p>
+                                                <button class="button is-light">Light</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="column is-two-fifths is-centered">
+                <div class="tile is-parent stretch-height">
+                    <div class="tile is-child full-height">
+                        <div id="googleMap" style="width:100%;" class="full-height"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="tile is-parent stretch-height">
+                    <article class="tile is-child notification full-height">
+                        <div class="content full-height">
+                            <p class="title has-text-weight-light is-size-4">Bucket list!</p>
+                            <div class="content full-height max-90">
+                                <!-- The tiles go here -->
+                            </div>
+                        </div>
+                    </article>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="columns">
-        
-        <div class="column side-panel-left">
-            <div class="columns">
-                <div class="column is-half is-offset-one-quarter">
-                    <h1 class="title">
-                        Bucket It!
-                    </h1>
-                </div>
-            </div>
-            <!-- Cards -->
-            <div class="tile is-ancestor">
-                <div class="tile is-vertical">
-                  <div class="tile is-parent">
-                    <div class="tile is-child notification is-danger">
-                        <img src="https://www.newzealand.com/assets/Tourism-NZ/Christchurch-Canterbury/9aa11093e3/img-1536989144-436-6533-p-4AE01862-F0F6-45CC-A4A8B61D309D3D12-2544003__aWxvdmVrZWxseQo_FocalPointCropWzQyNyw2NDAsNTMsNTAsODUsImpwZyIsNjUsMi41XQ.jpg">
-                        <p class="title">Wide tile</p>
-                        <button class="button is-light">Light</button>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div class="tile is-ancestor">
-                <div class="tile is-vertical">
-                  <div class="tile is-parent">
-                    <div class="tile is-child notification is-danger">
-                        <img src="https://www.newzealand.com/assets/Tourism-NZ/Christchurch-Canterbury/9aa11093e3/img-1536989144-436-6533-p-4AE01862-F0F6-45CC-A4A8B61D309D3D12-2544003__aWxvdmVrZWxseQo_FocalPointCropWzQyNyw2NDAsNTMsNTAsODUsImpwZyIsNjUsMi41XQ.jpg">
-                        <p class="title">Wide tile</p>
-                        <button class="button is-light">Light</button>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <!-- Cards -->
-        </div>
-
-        <div class="column map">
-            We have used artificial intelligence to find that you are in GridAKL
-        </div>
-
-        <div class="column side-panel-right">
-            <div class="columns">
-                <div class="column is-half is-offset-one-quarter">
-                    <h1 class="title">
-                        Bucket It!
-                    </h1>
-                </div>
-            </div>
-        </div>
-
-    </div>
+    <script src="/js/index.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBInRpkIDb9ZNMHku6yzGbxjkx98if5qyY&callback=renderMap"></script>
 
 </body>
 
-<script src="./index.js"></script>
-
 </html>
-

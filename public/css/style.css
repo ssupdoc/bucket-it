@@ -6,9 +6,10 @@
     height: 100%
 }
 
-.max-80 {
-    height: 80%;
-    overflow: auto;
+.max-90 {
+    height: 90%;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .simple-padding {
