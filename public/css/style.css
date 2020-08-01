@@ -46,6 +46,7 @@
     left: 30%;
     height: 90%;
     width: 40%;
+    padding: 0px;
 }
 
 .side-panel-right{
@@ -62,4 +63,5 @@
     background-color: #FAFAFA;
     box-shadow: 2px 2px 8px;
 }
+
 
