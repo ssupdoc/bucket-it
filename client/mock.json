@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "name": "Fiordland National Park",
+        "image": "https://www.planetware.com/photos-large/NZ/new-zealand-south-island-fiordland-national-park.jpg" 
+    },
+    {
+        "id": 2,
+        "name": "Mount Cook National Park",
+        "image": "https://www.planetware.com/photos-large/NZ/new-zealand-south-island-aoraki-mount-cook-national-park.jpg" 
+    },
+    {
+        "id": 3,
+        "name": "Lake Taupo",
+        "image": "https://www.planetware.com/photos-large/NZ/new-zealand-north-island-tongariro-national-park.jpg" 
+    },
+    {
+        "id": 4,
+        "name": "Franz Josef Glaciers",
+        "image": "https://www.planetware.com/photos-large/NZ/new-zealand-south-fox-and-franz-josef-glaciers.jpg" 
+    },
+    {
+        "id": 5,
+        "name": "Abel Tasman National Park",
+        "image": "https://www.planetware.com/wpimages/2019/09/new-zealand-top-attractions-abel-tasman-national-park-coast-track.jpg" 
+    }
+]
