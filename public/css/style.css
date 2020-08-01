@@ -57,3 +57,8 @@
     width: 30%;
 }
 
+.tile-color{
+    background-color: #FAFAFA;
+    box-shadow: 2px 2px 8px;
+}
+
