@@ -87,7 +87,7 @@ function addMarker(map, pos, title) {
  * Fetches nearby places from API
  */
 function fetchNearbyPlaces(coords) {
-    fetch('/js/mock.json')
+    fetch(`/js/mock.json?lat=${coords.lat}&lng=${coords.lng}`)
         .then(response => response.json())
         .then(data => {
             if (data && data.length) {
@@ -105,6 +105,12 @@ function renderAllPlaces() {
 function sanitizeData(data) {
     let bucketList = getBucketList()
     data.forEach(place => {
+        if(place.coords && place.coords.length) {
+            let _tempCoords = {}
+            _tempCoords.lng = place.coords[0]
+            _tempCoords.lat = place.coords[1]
+            place.coords = _tempCoords
+        }
         let bucketItem = bucketList.find(bucketPlace => bucketPlace.id === place.id)
         if (!bucketItem) {
             place.columnType = "nearby"
