@@ -2,6 +2,14 @@ const AUCKLAND_LOCATION = { lat: -36.8483, lng: 174.7625 }
 let placeMaster = []
 let map;
 
+const defaultImages = [
+    "https://www.planetware.com/photos-large/NZ/new-zealand-south-island-fiordland-national-park.jpg",
+    "https://www.planetware.com/photos-large/NZ/new-zealand-south-island-aoraki-mount-cook-national-park.jpg",
+    "https://www.planetware.com/photos-large/NZ/new-zealand-north-island-tongariro-national-park.jpg",
+    "https://www.planetware.com/photos-large/NZ/new-zealand-south-fox-and-franz-josef-glaciers.jpg",
+    "https://www.planetware.com/wpimages/2019/09/new-zealand-top-attractions-abel-tasman-national-park-coast-track.jpg"
+]
+
 /**
  * Render map based on current location
  */
@@ -75,11 +83,11 @@ function setMapView(map, pos, zoom) {
  * @param {*} pos the lat long to set view for
  * @param {*} title the title of the marker
  */
-function addMarker(map, pos, title, color='blue') {
+function addMarker(map, pos, title, color = 'blue') {
 
     let iconUrl = {
         url: `http://maps.google.com/mapfiles/ms/icons/${color}-dot.png`
-      }
+    }
     let marker = new google.maps.Marker({
         position: pos,
         map: map,
@@ -87,9 +95,9 @@ function addMarker(map, pos, title, color='blue') {
         icon: iconUrl
     });
 
-    google.maps.event.addListener(marker, 'click', (function(marker) {
-        return function() {
-            if(infoWindow) {
+    google.maps.event.addListener(marker, 'click', (function (marker) {
+        return function () {
+            if (infoWindow) {
                 infoWindow.close()
             }
             infoWindow = new google.maps.InfoWindow();
@@ -122,7 +130,7 @@ function renderAllPlaces() {
 
 function addNearbyMarkers() {
     placeMaster.forEach(place => {
-        if(place.coords) {
+        if (place.coords) {
             addMarker(map, place.coords, place.name, 'red')
         }
     })
@@ -131,11 +139,14 @@ function addNearbyMarkers() {
 function sanitizeData(data) {
     let bucketList = getBucketList()
     data.forEach(place => {
-        if(place.coords && place.coords.length) {
+        if (place.coords && place.coords.length) {
             let _tempCoords = {}
             _tempCoords.lng = place.coords[0]
             _tempCoords.lat = place.coords[1]
             place.coords = _tempCoords
+        }
+        if(!place.img) {
+            place.img = defaultImages[Math.floor(Math.random() * defaultImages.length)];
         }
         let bucketItem = bucketList.find(bucketPlace => bucketPlace.id === place.id)
         if (!bucketItem) {
