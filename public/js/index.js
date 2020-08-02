@@ -4,6 +4,7 @@ window.onload = () => {
 
 const AUCKLAND_LOCATION = { lat: -36.8483, lng: 174.7625 }
 let placeMaster = []
+let map;
 
 /**
  * Render map based on current location
@@ -75,12 +76,28 @@ function setMapView(map, pos, zoom) {
  * @param {*} pos the lat long to set view for
  * @param {*} title the title of the marker
  */
-function addMarker(map, pos, title) {
+function addMarker(map, pos, title, color='blue') {
+
+    let iconUrl = {
+        url: `http://maps.google.com/mapfiles/ms/icons/${color}-dot.png`
+      }
     let marker = new google.maps.Marker({
         position: pos,
         map: map,
-        title: title
+        title: title,
+        icon: iconUrl
     });
+
+    google.maps.event.addListener(marker, 'click', (function(marker) {
+        return function() {
+            if(infoWindow) {
+                infoWindow.close()
+            }
+            infoWindow = new google.maps.InfoWindow();
+            infoWindow.setContent(title);
+            infoWindow.open(map, marker);
+        }
+    })(marker));
     return marker
 }
 
@@ -101,6 +118,15 @@ function fetchNearbyPlaces() {
 function renderAllPlaces() {
     renderNearbyPlaces(getFromPlaceMaster('nearby'))
     renderBucketList()
+    addNearbyMarkers()
+}
+
+function addNearbyMarkers() {
+    placeMaster.forEach(place => {
+        if(place.coords) {
+            addMarker(map, place.coords, place.name, 'red')
+        }
+    })
 }
 
 function sanitizeData(data) {
