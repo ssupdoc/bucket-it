@@ -68,3 +68,10 @@
     width: 40%;
 }
 
+.text-center {
+    text-align: center;
+}
+
+.mt-10 {
+    margin-top: 10rem
+}
