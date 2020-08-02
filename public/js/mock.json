@@ -12,7 +12,8 @@
     {
         "id": 3,
         "name": "Lake Taupo",
-        "image": "https://www.planetware.com/photos-large/NZ/new-zealand-north-island-tongariro-national-park.jpg" 
+        "image": "https://www.planetware.com/photos-large/NZ/new-zealand-north-island-tongariro-national-park.jpg" ,
+        "coords": {"lat": -38.7908, "lng": 175.9041}
     },
     {
         "id": 4,
