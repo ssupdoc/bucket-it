@@ -10,7 +10,7 @@ app.get('/api', async (req, res) => {
 
     let x= req.query.lng || 174.904069;
     let y= req.query.lat || -37.012920;
-    const response = await fetch(`https://koordinates.com/services/query/v1/vector.json?key=922fbede85634e46900d2ab5b5fb46ee&layer=754&x=${x}&y=${y}&max_results=10&radius=4000&geometry=true`
+    const response = await fetch(`https://koordinates.com/services/query/v1/vector.json?key=922fbede85634e46900d2ab5b5fb46ee&layer=754&x=${x}&y=${y}&max_results=10&radius=10000&geometry=true`
     );
     const json = await response.json();
     console.log(json)
