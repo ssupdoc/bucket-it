@@ -241,7 +241,7 @@ function setMapView(map, pos, zoom) {
  */
 function addMarker(map, pos, title, color = "blue") {
     let iconUrl = {
-        url: `http://maps.google.com/mapfiles/ms/icons/${color}-dot.png`,
+        url: `https://maps.google.com/mapfiles/ms/icons/${color}-dot.png`,
     };
     let marker = new google.maps.Marker({
         position: pos,
