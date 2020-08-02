@@ -105,11 +105,13 @@ function renderAllPlaces() {
 
 function sanitizeData(data) {
     let bucketList = getBucketList()
-    data.forEach(place => { 
-        if(!bucketList.find(bucketPlace => bucketPlace.id === place.id )) {
-            place.columnType = "nearby" 
+    data.forEach(place => {
+        let bucketItem = bucketList.find(bucketPlace => bucketPlace.id === place.id)
+        if (!bucketItem) {
+            place.columnType = "nearby"
         } else {
             place.columnType = "bucket"
+            place.checked = bucketItem.checked
         }
     })
     return data
@@ -147,8 +149,8 @@ function renderBucketList() {
                     <div class="tile is-child notification tile-color">
                         <img src="${place.image}">
                         <p class="subtitle has-text-centered">${place.name}</p>
-                        <label class="checkbox is-pulled-right">
-                            <input type="checkbox">
+                        <label id="bucket-${place.id}" class="checkbox is-pulled-right">
+                            <input id="check-${place.id}" type="checkbox" onclick="checkBucketItem(event)">
                             Done
                         </label>
                     </div>
@@ -156,6 +158,11 @@ function renderBucketList() {
             </div>
         </div>`
         $bucketListDiv.innerHTML += tileDiv
+    })
+
+    bucketList.forEach(place => {
+        let checkBox = document.getElementById('check-' + place.id)
+        checkBox.checked = place.checked
     })
 }
 
@@ -167,15 +174,29 @@ function addToBucketList(event) {
     renderAllPlaces()
 }
 
+function checkBucketItem(event) {
+    const placeId = event.target.id.split('-')[1]
+    let place = placeMaster.find(place => place.id == placeId)
+    place.checked = !place.checked
+    addBucketItemToLocalStorage(place)
+    sanitizeData(placeMaster)
+    renderAllPlaces()
+}
+
 function addBucketItemToLocalStorage(place) {
     let currentLocalStorage = getBucketList()
-    currentLocalStorage.unshift(place)
+    let existingPlace = currentLocalStorage.find(storedPlace => storedPlace.id === place.id)
+    if(!existingPlace) {
+        currentLocalStorage.unshift(place)
+    } else {
+        existingPlace.checked = place.checked
+    }
     localStorage.setItem('bucketList', JSON.stringify(currentLocalStorage))
 }
 
 function getBucketList() {
     let currentLocalStorage = localStorage.getItem('bucketList')
-    if(currentLocalStorage) {
+    if (currentLocalStorage) {
         currentLocalStorage = JSON.parse(currentLocalStorage)
     } else {
         currentLocalStorage = []
