@@ -301,7 +301,10 @@ function sanitizeData(data) {
       place.checked = bucketItem.checked;
     }
   });
-  return data;
+
+  let doneItems = getDoneList()
+  placeMaster = data.filter(place => !doneItems.map(doneItem => doneItem.id).includes(place.id));
+  return placeMaster
 }
 
 function renderNearbyPlaces(nearbyPlaces) {
@@ -366,7 +369,7 @@ function renderBucketList() {
                         <div class="media-content">
                             <p class="title is-5">${place.name}</p>
                         </div>
-                        <button class="button is-success" id="bucket-${place.id}">
+                        <button class="button is-success is-small" id="bucket-${place.id}" onclick="checkBucketItem(this.id)">
                             <span class="icon is-small">
                             <i class="fas fa-check"></i>
                             </span>
@@ -381,11 +384,6 @@ function renderBucketList() {
     $bucketListDiv.innerHTML =
       '<p class="mt-10 is-size-4 text-center">Go for it and add to your bucket list!</p>';
   }
-
-  bucketList.forEach((place) => {
-    let checkBox = document.getElementById("check-" + place.id);
-    checkBox.checked = place.checked;
-  });
 }
 
 function addToBucketList(event) {
@@ -396,14 +394,43 @@ function addToBucketList(event) {
   renderAllPlaces();
 }
 
-function checkBucketItem(event) {
-  const placeId = event.target.id.split("-")[1];
+function checkBucketItem(placeId) {
+  placeId = placeId.split("-")[1];
   let place = placeMaster.find((place) => place.id == placeId);
   place.checked = !place.checked;
-  addBucketItemToLocalStorage(place);
+  removeBucketItemToLocalStorage(place);
+  addToDoneListLocalStorage(place)
   sanitizeData(placeMaster);
   renderAllPlaces();
 }
+
+function addToDoneListLocalStorage(place) {
+    let currentLocalStorage = getDoneList();
+    let existingPlace = currentLocalStorage.find(
+      (storedPlace) => storedPlace.id === place.id
+    );
+    if (!existingPlace) {
+      currentLocalStorage.unshift(place);
+    } else {
+      existingPlace.checked = place.checked;
+    }
+    localStorage.setItem("doneList", JSON.stringify(currentLocalStorage));
+  }
+  
+  function getDoneList() {
+    let currentLocalStorage = localStorage.getItem("doneList");
+    if (currentLocalStorage) {
+      currentLocalStorage = JSON.parse(currentLocalStorage);
+    } else {
+      currentLocalStorage = [];
+    }
+    return currentLocalStorage;
+  }
+
+function removeBucketItemToLocalStorage(place) {
+    let currentLocalStorage = getBucketList();
+    localStorage.setItem("bucketList", JSON.stringify(currentLocalStorage.filter(current => current.id != place.id)));
+  }
 
 function addBucketItemToLocalStorage(place) {
   let currentLocalStorage = getBucketList();
