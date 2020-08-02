@@ -1,7 +1,3 @@
-window.onload = () => {
-    fetchNearbyPlaces()
-}
-
 const AUCKLAND_LOCATION = { lat: -36.8483, lng: 174.7625 }
 let placeMaster = []
 
@@ -25,16 +21,19 @@ function renderMap() {
 
                 addMarker(map, pos, 'You are here')
                 setMapView(map, pos, 10)
+                fetchNearbyPlaces(pos)
             },
             () => {
                 // handleLocationError(true, infoWindow, map.getCenter());
                 addMarker(map, AUCKLAND_LOCATION, 'You are here')
+                fetchNearbyPlaces(AUCKLAND_LOCATION)
             }
         );
     } else {
         // Browser doesn't support Geolocation
         // handleLocationError(false, infoWindow, map.getCenter());
         addMarker(map, AUCKLAND_LOCATION, 'You are here')
+        fetchNearbyPlaces(AUCKLAND_LOCATION)
     }
 }
 
@@ -87,7 +86,7 @@ function addMarker(map, pos, title) {
 /**
  * Fetches nearby places from API
  */
-function fetchNearbyPlaces() {
+function fetchNearbyPlaces(coords) {
     fetch('/js/mock.json')
         .then(response => response.json())
         .then(data => {
@@ -186,7 +185,7 @@ function checkBucketItem(event) {
 function addBucketItemToLocalStorage(place) {
     let currentLocalStorage = getBucketList()
     let existingPlace = currentLocalStorage.find(storedPlace => storedPlace.id === place.id)
-    if(!existingPlace) {
+    if (!existingPlace) {
         currentLocalStorage.unshift(place)
     } else {
         existingPlace.checked = place.checked
