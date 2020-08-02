@@ -119,46 +119,56 @@ function sanitizeData(data) {
 
 function renderNearbyPlaces(nearbyPlaces) {
     let $nearbyPlacesDiv = document.getElementById('nearby-dynamic')
-    $nearbyPlacesDiv.innerHTML = ''
-    nearbyPlaces.forEach(place => {
-        let tileDiv = `
-        <div class="tile is-ancestor" id="place-tile-${place.id}">
-            <div class="tile is-vertical">
-                <div class="tile is-parent">
-                <div class="tile is-child notification tile-color">
-                    <img src="${place.image}">
-                    <p class="subtitle has-text-centered">${place.name}</p>
-                    <button id="bucket-${place.id}" onclick="addToBucketList(event)" class="button is-success is-small is-pulled-right">Bucket it!</button>
+    if (nearbyPlaces && nearbyPlaces.length) {
+        $nearbyPlacesDiv.innerHTML = ''
+        nearbyPlaces.forEach(place => {
+            let tileDiv = `
+            <div class="tile is-ancestor" id="place-tile-${place.id}">
+                <div class="tile is-vertical">
+                    <div class="tile is-parent">
+                    <div class="tile is-child notification tile-color">
+                        <img src="${place.image}">
+                        <p class="subtitle has-text-centered">${place.name}</p>
+                        <button id="bucket-${place.id}" onclick="addToBucketList(event)" class="button is-success is-small is-pulled-right">Bucket it!</button>
+                    </div>
+                    </div>
                 </div>
-                </div>
-            </div>
-        </div>`
-        $nearbyPlacesDiv.innerHTML += tileDiv
-    })
+            </div>`
+            $nearbyPlacesDiv.innerHTML += tileDiv
+        })
+    } else {
+        $nearbyPlacesDiv.innerHTML = '<p class="mt-10 is-size-4 text-center"> Hurray! You have covered all nearby places </p>'
+    }
+
 }
 
 function renderBucketList() {
     let bucketList = getBucketList()
     let $bucketListDiv = document.getElementById('bucket-dynamic')
-    $bucketListDiv.innerHTML = ''
-    bucketList.forEach(place => {
-        let tileDiv = `
-        <div class="tile is-ancestor" id="place-tile-${place.id}">
-            <div class="tile is-vertical">
-                <div class="tile is-parent">
-                    <div class="tile is-child notification tile-color">
-                        <img src="${place.image}">
-                        <p class="subtitle has-text-centered">${place.name}</p>
-                        <label id="bucket-${place.id}" class="checkbox is-pulled-right">
-                            <input id="check-${place.id}" type="checkbox" onclick="checkBucketItem(event)">
-                            Done
-                        </label>
+    if (bucketList && bucketList.length) {
+        $bucketListDiv.innerHTML = ''
+        bucketList.forEach(place => {
+            let tileDiv = `
+            <div class="tile is-ancestor" id="place-tile-${place.id}">
+                <div class="tile is-vertical">
+                    <div class="tile is-parent">
+                        <div class="tile is-child notification tile-color">
+                            <img src="${place.image}">
+                            <p class="subtitle has-text-centered">${place.name}</p>
+                            <label id="bucket-${place.id}" class="checkbox is-pulled-right">
+                                <input id="check-${place.id}" type="checkbox" onclick="checkBucketItem(event)">
+                                Done
+                            </label>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>`
-        $bucketListDiv.innerHTML += tileDiv
-    })
+            </div>`
+            $bucketListDiv.innerHTML += tileDiv
+        })
+    } else {
+        $bucketListDiv.innerHTML = '<p class="mt-10 is-size-4 text-center">Go for it and add to your bucket list!</p>'
+    }
+
 
     bucketList.forEach(place => {
         let checkBox = document.getElementById('check-' + place.id)
@@ -186,7 +196,7 @@ function checkBucketItem(event) {
 function addBucketItemToLocalStorage(place) {
     let currentLocalStorage = getBucketList()
     let existingPlace = currentLocalStorage.find(storedPlace => storedPlace.id === place.id)
-    if(!existingPlace) {
+    if (!existingPlace) {
         currentLocalStorage.unshift(place)
     } else {
         existingPlace.checked = place.checked
