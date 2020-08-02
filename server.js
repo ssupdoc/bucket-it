@@ -41,14 +41,14 @@ app.get('/api', async (req, res) => {
             const json2 = response2.json();
             console.log(json2)
 
-            img = 'https://coolkidproblems.com/wp-content/uploads/2017/06/coming-soon-1.jpg'
+            img = ''
 
             if(json2['candidates'] && json2['candidates'].length > 0)
             {
                 if(json2['candidates'][0].length > 2)
                 {
                     reference = json2['candidates'][0]['photos'][0]['photo_reference']
-                    img = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference='+reference+'&key=AIzaSyCj0dZL1s1T30TPvf5II-8HRW-1U6_C9mk'
+                    img = ''
                 }
             }
             
@@ -56,7 +56,7 @@ app.get('/api', async (req, res) => {
                 'id': json['vectorQuery']['layers']['754']['features'][i]['properties']['NaPALIS_ID'],
                 'name': json['vectorQuery']['layers']['754']['features'][i]['properties']['Name'],
                 'coords': json['vectorQuery']['layers']['754']['features'][i]['geometry']['coordinates'][0][0],
-                'img': img
+                'img': ''
             })
         }
 
