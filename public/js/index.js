@@ -104,11 +104,11 @@ function addMarker(map, pos, title, color='blue') {
  * Fetches nearby places from API
  */
 function fetchNearbyPlaces(coords) {
-    fetch(`/js/mock.json?lat=${coords.lat}&lng=${coords.lng}`)
+    fetch(`/api?lat=${coords.lat}&lng=${coords.lng}`)
         .then(response => response.json())
         .then(data => {
-            if (data && data.length) {
-                placeMaster = sanitizeData(data)
+            if (data && data.place && data.place.length) {
+                placeMaster = sanitizeData(data.place)
                 renderAllPlaces()
             }
         });
@@ -158,7 +158,7 @@ function renderNearbyPlaces(nearbyPlaces) {
                 <div class="tile is-vertical">
                     <div class="tile is-parent">
                     <div class="tile is-child notification tile-color">
-                        <img src="${place.image}">
+                        <img src="${place.img}">
                         <p class="subtitle has-text-centered">${place.name}</p>
                         <button id="bucket-${place.id}" onclick="addToBucketList(event)" class="button is-success is-small is-pulled-right">Bucket it!</button>
                     </div>
@@ -184,7 +184,7 @@ function renderBucketList() {
                 <div class="tile is-vertical">
                     <div class="tile is-parent">
                         <div class="tile is-child notification tile-color">
-                            <img src="${place.image}">
+                            <img src="${place.img}">
                             <p class="subtitle has-text-centered">${place.name}</p>
                             <label id="bucket-${place.id}" class="checkbox is-pulled-right">
                                 <input id="check-${place.id}" type="checkbox" onclick="checkBucketItem(event)">
